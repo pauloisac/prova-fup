@@ -1,0 +1,5 @@
+a) Falsa, operadores de atribuição podem ser feitos da direita para esquerda. Ex: x = x + 1.
+b)Verdadeira, pois variáveis podem ser iniciadas com letras ou underline(_).
+c) Falsa, no exemplo é apenas uma mensagem , não há valor que será armazenado, porque está sendo dentro de aspas e não foi passada nenhuma variável dentro do printf.
+d)Falsa, por não tem parênteses, ele seguirá a ordem de resolução dos operadores matemáticos. Portanto, não necessariamente da esquerda para a direita.
+e) Falsa, pois h22 é uma variável válida, pelo fato, de começar com uma letra. Enquanto, os demais se iniciam com números, tornando-as inválidas.
