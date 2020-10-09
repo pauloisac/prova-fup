@@ -1,0 +1,34 @@
+int *ptr;  
+    ptr = retornaVetor();  
+      
+    printf(&quot;\n\n&quot;);  
+      
+    int i;  
+    for (i = 0; i &lt; 6; i++) {  
+        printf(&quot;Valor do ponteiro eh: %i \n&quot;, *(ptr + i));  
+    }  
+
+    //Criado com malloc deve ser liberado com free, ou então, é memory leak!
+    free(ptr); 
+    return 0;   
+}  
+  
+int *retornaVetor() {  
+    int i;  
+
+    int my_array[] = {7,23,17,4,-5,100};  
+
+    //Reservamos memória para os dados no heap
+    int* ptr = malloc(sizeof(int) * 6);                  
+
+    //Copiamos os dados do stack para o heap
+    memcpy(ptr, my_array, sizeof(myarray));
+
+    printf(&quot;\n\n&quot;);  
+    for (i = 0; i &lt; 6; i++) {  
+        printf(&quot;Valor no ponteiro: %i \n&quot;, ptr[i]);  //Notação equivalente a *(ptr + i)
+    }  
+  
+    printf(&quot;\n\n&quot;);  
+    return ptr;  
+}  [/code]
