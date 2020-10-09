@@ -1,0 +1,296 @@
+#include <stdio.h>
+#include <locale.h>
+
+int main()
+{
+    /* O programa irer pegar o número inteiro  e avaliar o  valor  das centen, dezena e
+    unidade desse número*/
+
+    int valor,i,a = 0;
+    char *x,*y,*z;
+
+    setlocale(LC_CTYPE,"ptb");
+
+   // criarei um array com os possiveis valores de unidade por extenso//
+
+    char *uniesp[] ={"onze","doze","treze","quatorze","quinze","dezeseis","dezesete","dezoito","dezenove"};
+    char *uni[] = {"um", "dois", "três", "quatro", "cinco", "seis","sete", "oito", "nove"};
+    char *dez[] = {"dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"};
+    char *cent[] = {"Cento", "Dozentos", "Trezentos", "Quatrocentos", "Quinhetos", "Seiscentos", "Setecentos", "Oitocentos", "Novecentos"};
+
+// Estrutura para ver qual é o valor de x que seria as centenas
+    printf("Digite um Número inteiro \n");
+    scanf("%d", &valor);
+
+        if(valor < 100)
+        {
+            x = 0;
+        }
+        else if(valor >= 100 && valor < 200)
+        {
+            valor -= 100;
+            x = cent[0];
+        }
+        else if(valor >= 200 && valor < 300)
+        {
+            valor -= 200;
+            x = cent[1];
+        }
+        else if(valor >= 300 && valor < 400)
+        {
+            valor -= 300;
+            x = cent[2];
+        }
+        else if(valor >= 400 && valor < 500)
+        {
+            valor -= 400;
+            x = cent[3];
+        }
+        else if(valor >= 500 && valor < 600)
+        {
+            valor -= 500;
+            x = cent[4];
+        }
+        else if(valor >= 600 && valor < 700)
+        {
+            valor -= 600;
+            x = cent[5];
+        }
+        else if(valor >= 700 && valor < 800)
+        {
+            valor -= 700;
+            x = cent[6];
+        }
+        else if(valor >= 800 && valor < 900)
+        {
+            valor -= 800;
+            x = cent[7];
+        }
+        else if(valor >= 900 && valor < 1000)
+        {
+            valor -= 900;
+            x = cent[8];
+        }
+///////////////////////////////////////////////////////////////////////////
+
+// estrutura para verificar o valor de y dezenas
+// como onze até o dezenove saiem do padrão criei outro jogo de if e else para verificar se pertece a esse caso especifico
+////////////////////////////////////////////////////////////////////////////
+
+        if(valor < 10)
+        {
+            y = 0;
+        }
+        else if(valor >= 10 && valor < 20)
+        {
+            valor -= 10;
+            if(valor == 0)
+            {
+                y = dez[0];
+            }
+            else if(valor == 1)
+            {
+                valor -=1;
+                y = uniesp[0];
+                z = 0;
+
+            }
+            else if(valor == 2)
+            {
+                valor -=2;
+                y = uniesp[1];
+                z = 0;
+            }
+            else if(valor == 3)
+            {
+                valor -=3;
+                y = uniesp[2];
+                z = 0;
+            }
+            else if(valor == 4)
+            {
+                valor -=4;
+                y = uniesp[3];
+                z = 0;
+            }
+            else if(valor == 5)
+            {
+                valor -=5;
+                y = uniesp[4];
+                z = 0;
+            }
+            else if(valor == 6)
+            {
+                valor -=6;
+                y = uniesp[5];
+                z = 0;
+            }
+            else if(valor == 7)
+            {
+                valor -=7;
+                y = uniesp[6];
+                z = 0;
+            }
+            else if(valor == 8)
+            {
+                valor -=8;
+                y = uniesp[7];
+                z = 0;
+            }
+            else if(valor == 9)
+            {
+                valor -=9;
+                y = uniesp[8];
+                z = 0;
+            }
+        }
+///////////////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+        else if(valor >= 20 && valor < 30)
+        {
+            valor -= 20;
+            y = dez[1];
+        }
+        else if(valor >= 30 && valor < 40)
+        {
+            valor -= 30;
+            y = dez[2];
+        }
+        else if(valor >= 40 && valor < 50)
+        {
+            valor -= 40;
+            y = dez[3];
+        }
+        else if(valor >= 50 && valor < 60)
+         {
+            valor -= 50;
+            y = dez[4];
+         }
+        else if(valor >= 60 && valor < 70)
+        {
+            valor -= 60;
+            y = dez[5];
+        }
+        else if(valor >= 70 && valor < 80)
+        {
+            valor -= 70;
+            y = dez[6];
+        }
+        else if(valor >= 80 && valor < 90)
+        {
+            valor -= 80;
+            y = dez[7];
+        }
+        else if(valor >= 90 && valor < 100)
+        {
+            valor -= 90;
+            y = dez[9];
+        }
+        else if(valor < 10)
+        {
+            y = 0;
+        }
+
+///////////////////////////////////////////////////////////////////////////
+
+
+
+//analise das unidades para verificar qual o valor de z
+
+
+////////////////////////////////////////////////////////////////////////////
+
+
+        if(valor <= 0)
+        {
+            z = 0;
+        }
+        else if(valor > 0 && valor < 2)
+        {
+            valor -= 1;
+            z = uni[0];
+        }
+        else if(valor > 1 && valor < 3)
+        {
+            valor -= 2;
+            z = uni[1];
+        }
+        else if(valor > 2 && valor < 4 )
+        {
+            valor -= 3;
+            z = uni[2];
+        }
+        else if(valor > 3 && valor < 5)
+        {
+            valor -= 4;
+            z = uni[3];
+        }
+        else if(valor > 4 && valor < 6)
+        {
+            valor -= 5;
+            z = uni[4];
+        }
+        else if(valor > 5 && valor < 7)
+        {
+            valor -= 6;
+            z = uni[5];
+        }
+        else if(valor > 6 && valor < 8)
+        {
+            valor -= 7;
+            z = uni[6];
+        }
+        else if(valor > 7 && valor < 9)
+        {
+            valor -= 8;
+            z = uni[7];
+        }
+        else if(valor > 8 && valor < 10 )
+        {
+            valor -= 9;
+            z = uni[8];
+        }
+        else if(valor < 0)
+            z = 0;
+///////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+
+    if(x != 0 && y == 0 && z == 0)
+    {
+        printf("\n%s",x);
+    }
+    else if (x != 0 && y != 0 && z == 0)
+    {
+        printf("\n %s e %s",x,y);
+    }
+    else if(x != 0 && y == 0 && z != 0)
+    {
+        printf("\n %s e %s",x,z);
+    }
+    else if(x == 0 && y != 0 && z == 0)
+    {
+        printf("\n %s ",y);
+    }
+    else if(x == 0 && y == 0 && z != 0)
+    {
+        printf("\n %s",z);
+    }
+    else if(x ==  0 && y != 0 && z != 0)
+    {
+        printf("\n %s e %s",y,z);
+    }
+    else if(x != 0 && y != 0 && z != 0)
+    {
+        printf("\n %s e %s e %s",x,y,z);
+    }
+        return 0;
+}
