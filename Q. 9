@@ -1,0 +1,151 @@
+#include <stdio.h> 
+#include <stdlib.h>  
+#include <string.h>
+#include <assert.h>
+#include <stdbool.h>
+#include <stdint.h>
+ 
+#define MAX_STR_LEN 512
+#define SAFE_RELEASE(ptr) do { if((ptr)) free((ptr)); } while(0)
+ 
+typedef struct
+{
+    const char* key;
+    const char* value;
+} Pair;
+ 
+Pair DataBase[] = 
+{
+    { "esposa", "conjugue" },
+    { "homem" , "humano"   },
+    { "filho" , "prole"    },
+    { 0 }
+};
+ 
+ 
+/**
+ * @brief      Realiza a substituição de uma string por outra dentro do input
+ *             passado
+ *
+ * @param[in]  text         The text
+ * @param[in]  pattern      o padrao a ser substituido
+ * @param[in]  replacement  o novo valor que vai substituir o antigo
+ * @param[in]  input  o texto
+ *
+ * @return     o novo texto com as devidas substituicoes *
+ */
+char* StringReplace(const char* text, const char* pattern, const char* replacement);
+ 
+/**
+ * @brief      Does a process.
+ *
+ * @param[in]  text       The text
+ * @param      pDataBase  The data base
+ *
+ * @return     { description_of_the_return_value }
+ */
+char* DoProcess(const char* text, Pair* pDataBase);
+ 
+int main(int argc, char const *argv[])
+{
+    char str[MAX_STR_LEN] = {0};
+ 
+    // stdin = standard input = entrada padrao
+    if (!fgets(str, MAX_STR_LEN, stdin))
+    {
+        fprintf(stderr, "Erro ao ler a entrada\n");
+        exit(EXIT_FAILURE);
+    }
+ 
+    str[strlen(str) - 1] = '\0';
+ 
+    char* result = DoProcess(str, DataBase);
+    if (result != NULL)
+    {
+        printf("%s\n", result);
+        SAFE_RELEASE(result);
+    }
+ 
+    return 0;
+}
+ 
+char* DoProcess(const char* text, Pair* pDataBase)
+{
+    if (!text || !*text || !pDataBase)
+        return NULL;
+ 
+    char* result = NULL;
+    for (Pair* p = pDataBase; p->key != NULL; ++p)
+    {
+        if (strstr(text, p->key))
+        {
+            // Se tem mais de uma ocorrencia em text
+            if (result != NULL)
+            {
+                char* tmpPtr = StringReplace(result, p->key, p->value);
+                free(result);
+                result = tmpPtr;
+            }
+            else // se a ocorrencia aparece so uma vez em text
+            {
+                result = StringReplace(text, p->key, p->value);
+            }
+        }
+    }
+ 
+    return result;
+}
+ 
+char* StringReplace(const char* text, const char* pattern, const char* replacement)
+{
+    if (!text || !*text || !pattern || !*pattern || !replacement || !*replacement)
+        return NULL;
+ 
+    // quantidade de caracteres que o 'text' possui
+    const size_t txtlen = strlen(text);
+    const size_t patlen = strlen(pattern);
+    const size_t replen = strlen(replacement);
+ 
+    // contar quantas vezes 'pattern' ocorre dentro de text
+    const char* inputPtr = text;
+    const char* tmpPtr = NULL;
+    size_t patcnt = 0;
+ 
+    for (; (tmpPtr = strstr(inputPtr, pattern)); inputPtr = tmpPtr + patlen)
+        ++patcnt;
+ 
+    // calcular espaco nescessario
+    const size_t nRequiredSpace = txtlen + patcnt * (replen - patlen);
+    const size_t nBufferLen = sizeof(char) * (nRequiredSpace + 1); 
+ 
+    // aloca a memoria
+    char* buffer = (char *) malloc(nBufferLen);
+    assert(buffer != NULL);
+ 
+    char* pBuffer = buffer;
+    const char* pStr = text;
+ 
+    // text = a esposa eo homem
+    // pattern = esposa
+    for (size_t i = 0; i < txtlen; ++i)
+    {
+        if (*(pStr + i) == pattern[0])
+        {
+            if (i + patlen <= txtlen)
+            {
+                if (strncmp(pStr + i, pattern, patlen) == 0)
+                {
+                    memcpy(pBuffer, replacement, replen);
+                    pBuffer += replen;
+                    i += patlen - 1;
+                    continue;
+                }
+            }
+        }
+ 
+        *pBuffer++ = pStr[i];
+    }
+ 
+    *pBuffer++ = '\0';
+    return buffer;
+}
