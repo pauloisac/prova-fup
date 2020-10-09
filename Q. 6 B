@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <math.h>
+
+typedef unsigned long long llint;
+
+
+int main (void) {
+
+	const llint p = (llint) (pow (2.0, 23.0) -1.0);
+	const llint q = 1009999; // (llint) (2.0 * ((double) p / log((double) p)));
+
+	llint primes[q];
+
+	llint i=5, j=0, k=0, l=1, m=0;
+
+	for (m=0; m<q; m++) primes[m]=1;
+
+	primes[0]=2;
+	primes[1]=3;
+
+	do {
+
+		j = 0;
+		k= (llint) sqrt((double) i);
+
+		while ((primes[++j]<k) && (i%primes[j]));
+
+		if (primes[j]>k) primes[++l] = i;
+
+		i+=((i%3==2)?2:4);
+
+	} while (i<p && l<q);
+
+	for (m=0; m<l; m++) printf ("%llu ",primes[m]);
+	putc ('\n',stdout);
+
+	return 0;
+
+}
