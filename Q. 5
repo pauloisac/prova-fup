@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main(){
+
+	int i = 1, n, c = 0, C = -1, s, r;
+
+
+	printf("Digite o sentinela: \n");
+	scanf("%d", &s);
+
+	do{
+
+		printf("Digite o número %d: ", i);
+		scanf("%d", &n);
+
+		c = c + n;
+
+		C++;
+		i++;
+	}while(n != s);
+
+	r = c/C;
+
+	printf("Resultado: %d\n", r);
+	printf("sentinela: %d", s);
+	
+	return 0;
+}
